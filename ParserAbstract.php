@@ -10,6 +10,16 @@
 abstract class ParserAbstract
 {
     /**
+     * getSupportedDomains
+     *
+     * @abstract
+     * @access public
+     * @return void
+     */
+
+    abstract function getSupportedDomains();
+
+    /**
      * Распарсить заданный адрес и вернуть объект с данными
      *
      * @param string $url
@@ -19,10 +29,27 @@ abstract class ParserAbstract
 
     public function parseUrl($url)
     {
-        $this->parseContent(
+        if (!$this->isSupportedUrl($url))
+        {
+            $this->log('Адрес ' . var_export($url, true) . ' не поддерживается');
+            return array();
+        }
+
+        return $this->parseContent(
             $this->get($url)
         );
     }
+
+    /**
+     * Проверка адреса на корректность
+     *
+     * @param string $url
+     * @abstract
+     * @access protected
+     * @return bool
+     */
+
+    abstract protected function isSupportedUrl($url);
 
     /**
      * Распарсить контент страницы
@@ -34,6 +61,16 @@ abstract class ParserAbstract
      */
 
     abstract protected function parseContent($content);
+
+    /**
+     * Распарсить страницу со списком
+     *
+     * @abstract
+     * @access public
+     * @return void
+     */
+
+    abstract public function parseList();
 
     /**
      * Добавить ссылку в очередь на обработку
