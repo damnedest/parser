@@ -10,14 +10,14 @@
 abstract class ParserAbstract
 {
     /**
-     * getSupportedDomains
+     * Возвращает список поддержиываемых доменов
      *
      * @abstract
      * @access public
      * @return void
      */
 
-    abstract function getSupportedDomains();
+    abstract public function getSupportedDomains();
 
     /**
      * Распарсить заданный адрес и вернуть объект с данными
