@@ -101,15 +101,43 @@ abstract class ParserAbstract
     /**
      * Выводит информацию на экран
      *
-     * @param text $text
+     * @param string $text
+     * @param bool $new_line
+     * @param string $color
      * @access protected
-     * @return void
+     * @return ParserAbstract this
      */
 
-    protected function log($text)
+    protected function log($text, $new_line = true, $color = 'default')
     {
         echo $text . PHP_EOL;
 
         return $this;
+    }
+
+    /**
+     * Вывести на экран сообщение об ошибке
+     *
+     * @param string $text
+     * @access protected
+     * @return ParserAbstract this
+     */
+
+    protected function logError($text)
+    {
+        return $this->log('ERROR: ' . $text);
+    }
+
+    /**
+     * Вывести на экран сообщение об предупреждении
+     *
+     * @param string $text
+     * @access protected
+     * @return ParserAbstract this
+     */
+
+    protected function logWarning($text)
+    {
+        return $this->log('WARNING: ' . $text);
     }
 }
